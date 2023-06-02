@@ -1,0 +1,135 @@
+<h2 class="d-flex justify-content-center">Edit Form</h2>
+
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+  <div formGroupName="issue">
+    <div class="container">
+      <div class="form-group mb-5">
+        <label for="subject" class="form-label">Subject</label>
+        <input type="text" id="subject" class="form-control" formControlName="subject"/>
+      </div>
+
+      <div class="form-group mb-5">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" class="form-control" formControlName="description"></textarea>
+      </div>
+
+      <div class="">
+        <div class="mb-5 row">
+          <div class="col-2">
+            <label for="state" class="form-label">State</label>
+          </div>
+          <div class="col-4">
+            <select id="state" class="form-control" formControlName="state">
+              <option value="new">New</option>
+              <option value="in_progress">In Progress</option>
+              <option value="ready_for_test">Ready for test</option>
+              <option value="closed">Closed</option>
+              <option value="needs_info">Needs info</option>
+              <option value="rejected">Rejected</option>
+              <option value="postponed">Postponed</option>
+
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-5 row">
+          <div class="col-2">
+            <label for="typeof" class="form-label" >Typeof</label>
+          </div>
+          <div class="col-4">
+            <select id="typeof" class="form-control" formControlName="typeof">
+              <option value="bug">Bug</option>
+              <option value="enhancement">Enhancement</option>
+              <option value="question">Question</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-5 row">
+          <div class="col-2">
+            <label for="severity" class="form-label" >Severity</label>
+          </div>
+          <div class="col-4">
+            <select id="severity" class="form-control" formControlName="severity">
+              <option value="wishlist">Wishlist</option>
+              <option value="minor">Minor</option>
+              <option value="normal">Normal</option>
+              <option value="important">Important</option>
+              <option value="critical">Critical</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-5 row">
+          <div class="col-2">
+          </div>
+          <div class="col-4">
+            <label for="priority" class="form-label" >Priority</label>
+            <select id="priority" class="form-control" formControlName="priority">
+              <option value="low">Low</option>
+              <option value="normal">Normal</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-5 row">
+        <div class="col-2">
+          <label for="assigned_to_id" class="form-label" >Assigned To</label>
+        </div>
+        <div class="col-4">
+          <select id="assigned_to_id" class="form-control" formControlName="assigned_to_id">
+            <option value="">Seleccionar</option>
+            <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group mb-5 row">
+        <div class="col-2">
+          <label for="watched_by_ids" class="form-label">Watched By</label>
+        </div>
+        <div class="col-4">
+          <select id="watched_by_ids" multiple class="form-control" formControlName="watched_by_ids">
+            <option *ngFor="let user of users" [value]="user.id" [selected]="watchers?.includes(user.id)">{{ user.name }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-5 row">
+        <div class="col-2">
+          <label for="documents" class="form-label">Documents</label>
+        </div>
+        <div class="col-4">
+          <input type="file" id="documents" class="form-control" name="documents" multiple  formControlName="documents"/>
+        </div>
+      </div>
+
+      <div class="form-group mb-5">
+        <label for="deadline" class="form-label">Deadline</label>
+        <input type="date" id="deadline" class="form-control" formControlName="deadline" />
+      </div>
+
+      <button type="submit" class="btn btn-success container espai">Submit</button>
+      <button class="btn btn-secondary container" (click)="goBack()">Back to Issues</button>
+    </div>
+  </div>
+</form>
+
+
+
+
+<!--
+       <div class = "mb-5 row">
+         <ng-container *ngIf="issue.documents.length > 0">
+           <h3>Documentos adjuntos:</h3>
+           <div *ngFor="let document of issue.documents">
+             <div>
+               <a [href]="getDocumentUrl(document)" target="_blank">{{ document.filename }}</a>
+               <button type="submit" class="btn btn-primary" (click)="deleteAttachments(document.id)"></button>
+             </div>
+           </div>
+         </ng-container>
+       </div>
+       -->

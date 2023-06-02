@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <br>
+        <h1 class="text-center custom-title">New Issue</h1>
+        <form [formGroup]="creationForm" class="form-style" (ngSubmit)="onSubmit('creationForm')">
+          <div formGroupName="issue">
+            <div class="form-group">
+              <label for="subject" class="h5">Subject:</label>
+              <input type="text" id="subject" formControlName="subject" class="form-control form-control-lg">
+            </div>
+
+            <div class="form-group">
+              <label for="description" class="h5">Description:</label>
+              <textarea id="description" formControlName="description" class="form-control form-control-lg"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="state" class="h5">State:</label>
+                <div class="select-arrow">
+                <select id="state" formControlName="state" class="form-control custom-select">
+                  <option *ngFor="let state of stateOptions" [value]="state">{{ state }}</option>
+                </select>
+                </div>
+              </div>
+
+            <div class="form-group">
+                <label for="typeof" class="h5">Type:</label>
+                <div class="select-arrow">
+                <select id="typeof" formControlName="typeof" class="form-control custom-select">
+                    <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
+                </select>
+                </div>
+              </div>
+    
+            <div class="form-group">
+                <label for="severity" class="h5">Severity:</label>
+                <div class="select-arrow">
+                <select id="severity" formControlName="severity" class="form-control custom-select">
+                    <option *ngFor="let severity of severityOptions" [value]="severity">{{ severity }}</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="priority" class="h5">Priority:</label>
+                <div class="select-arrow">
+                <select id="priority" formControlName="priority" class="form-control custom-select">
+                    <option *ngFor="let priority of priorityOptions" [value]="priority">{{ priority }}</option>
+                </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="assigned_to_id" class="h5">Assigned To ID:</label>
+                <div class="select-arrow">
+                  <select id="assigned_to_id" formControlName="assigned_to_id" class="form-control">
+                    <option *ngFor="let userId of userIds" [value]="userId">{{ userId }}</option>
+                  </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="deadline" class="h5">Deadline:</label>
+                <input type="datetime-local" id="deadline" formControlName="deadline" class="form-control form-control-lg">
+            </div>
+
+              
+
+          <div class="form-group">
+            <label for="documents" class="h5">Documents:</label>
+            <input type="file" id="documents" formControlName="documents" class="form-control form-control-lg">
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="button-group">
+              <button type="submit" [disabled]="!creationForm.valid" class="btn btn-success btn-lg">Create</button>
+              <div class="vertical-line"></div>
+              <button type="button" class="btn btn-danger btn-lg" (click)="goToIssues()">Back</button>
+            </div>
+          </div>
+
+
+          
+          <br>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

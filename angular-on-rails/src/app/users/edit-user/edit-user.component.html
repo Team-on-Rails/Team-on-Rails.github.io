@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Edit User</h1>
+
+  <ng-container *ngIf="user?.avatar">
+    <div class="container d-flex justify-content-center" [id]="user">
+      <img [src]="user.avatar" style="height: 200px;">
+    </div>
+  </ng-container>
+
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <div formGroupName="user">
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" formControlName="name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="bio">Bio</label>
+        <textarea id="bio" formControlName="bio" class="form-control" rows="3"></textarea>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="avatar">Avatar</label>
+      <input type="file" id="avatar" formControlName="avatar" (change)="onFileSelected($event)">
+    </div>
+    
+    <button type="submit"  class="btn btn-primary">Save</button>
+    
+  </form>
+  
+    <button type="button" class="btn btn-secondary" (click)="goBack()">Go to Users</button>
+</div>

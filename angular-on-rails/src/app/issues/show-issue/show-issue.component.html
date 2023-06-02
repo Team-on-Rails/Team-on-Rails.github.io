@@ -1,0 +1,84 @@
+<div class="d-flex align-items-center justify-content-center">
+  <h2>Show Issue</h2>
+</div>
+
+
+
+<div [id]="issue" class="issue-box container-xxl">
+  <div class="d-flex flex-column">
+    <div class="row flex-nowrap">
+      <div class="col-2 d-flex align-items-center"><strong>Subject</strong></div>
+      <div class="col-2 d-flex align-items-center"><strong>Description</strong></div>
+      <div class="col-1 d-flex align-items-center"><strong>Created by</strong></div>
+      <div class="col-1 d-flex align-items-center"><strong>Assigned_to</strong></div>
+      <div class="col-1 d-flex align-items-center"><strong>State</strong></div>
+      <div class="col-2 d-flex align-items-center"><strong>Typeof</strong></div>
+      <div class="col-1 d-flex align-items-center"><strong>Severity</strong></div>
+      <div class="col-1 d-flex align-items-center"><strong>Priority</strong></div>
+    </div>
+    <hr>
+    <div class="row flex-nowrap">
+      <div class="col-2 d-flex align-items-center">{{ issue?.subject }}</div>
+      <div class="col-2 d-flex align-items-center">{{ issue?.description }}</div>
+      <div class="col-1 d-flex align-items-center">{{ issue?.created_by_id }}</div>
+      <div class="col-1 d-flex align-items-center">{{ issue?.assigned_to_id }}</div>
+      <div class="col-1 d-flex align-items-center">{{ issue?.state }}</div>
+      <div class="col-2 d-flex align-items-center">{{ issue?.typeof }}</div>
+      <div class="col-1 d-flex align-items-center">{{ issue?.severity }}</div>
+      <div class="col-1 d-flex align-items-center">{{ issue?.priority }}</div>
+      <div class="col-1 d-flex align-items-center">
+        <ng-container *ngIf="issue?.bloqueada; else unlockBlock">
+          <form [formGroup]="unlockForm" (ngSubmit)="unlockIssue()" [hidden]="!unlockForm">
+            <button type="submit" class="btn btn-primary">Desbloquear</button>
+          </form>
+        </ng-container>
+
+        <ng-template #unlockBlock>
+          <form [formGroup]="blockForm" (ngSubmit)="blockIssue()" [hidden]="!blockForm">
+            <button type="submit" class="btn btn-primary">Bloquear</button>
+          </form>
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  <hr>
+
+<div class="container">
+  <h3>Deadline: {{ issue?.deadline | date }}</h3>
+</div>
+
+<div class="container">
+  <h4>Comments</h4>
+  <div>
+    <textarea type="text" #commentInput name="comment" cols="150" rows="5"> </textarea>
+  </div>
+  <button class="btn btn-primary" (click)="postComment(commentInput.value)">Post</button>
+</div>
+
+<div *ngFor="let com of comments" class="container">
+
+  <p>{{ com['content'] }}</p>
+</div>
+
+<div class="container">
+
+    <button (click)="followIssue()" *ngIf="!isWatcher" class="btn btn-primary">Watch</button>
+    <button (click)="unfollowIssue()" *ngIf="isWatcher" class="btn btn-warning">Unwatch</button>
+</div>
+
+
+<div class="container d-flex justify-content-around">
+  <button (click)="goBack()" class="btn btn-secondary">Back to issues</button>
+
+  <button (click)="editIssue()" class="btn btn-primary">Edit Issue</button>
+
+  <form (ngSubmit)="deleteIssue()">
+    <button type="submit" class="btn btn-danger">Delete Issue</button>
+  </form>
+
+</div>
+
+

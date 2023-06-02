@@ -1,0 +1,42 @@
+<h1 class="center-title">Resultados de la búsqueda:</h1>
+
+<div *ngIf="Issues.length > 0">
+  <div id="issues" class="container-xxl">
+    <div class="d-flex flex-column">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Subject</th>
+          <th scope="col">Description</th>
+          <th scope="col">Created by</th>
+          <th scope="col">State</th>
+          <th scope="col">Type</th>
+          <th scope="col">Severity</th>
+          <th scope="col">Priority</th>
+          <th scope="col">Show this issue</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let issue of Issues">
+          <td>{{ issue?.subject }}</td>
+          <td>{{ issue?.description }}</td>
+          <td>{{ issue?.created_by_id }}</td>
+          <td>{{ issue?.state }}</td>
+          <td>{{ issue?.typeof }}</td>
+          <td>{{ issue?.severity }}</td>
+          <td>{{ issue?.priority }}</td>
+          <td><button (click)="showIssue(issue.id)" class="btn btn-primary">Show this issue</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="Issues.length === 0">
+  <p>No se encontraron issues que coincidan con la búsqueda.</p>
+</div>
+
+<div class="d-flex justify-content-left">
+  <button (click)="goBackToIssues()" class="btn btn-secondary">Back to issues</button>
+</div>

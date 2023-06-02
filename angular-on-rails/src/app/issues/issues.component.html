@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-center">
+  <h1>Angular on Rails</h1>
+</div>
+
+<div class="d-flex justify-content-center container">
+  <form (ngSubmit)="buscarIssues()" method="get">
+    <input type="text" [(ngModel)]="busqueda" name="busqueda" placeholder="Buscar issues por asunto o descripción">
+    <button class="btn btn-outline-info" type="submit">Buscar</button>
+  </form>
+</div>
+
+<div class="container d-flex justify-content-center">
+  <select [(ngModel)]="existingParams.state">
+    <option *ngFor="let state of issueStates" [value]="state">{{ state }}</option>
+  </select>
+
+  <select [(ngModel)]="existingParams.typeOf">
+    <option *ngFor="let typeOf of issueTypes" [value]="typeOf">{{ typeOf }}</option>
+  </select>
+
+  <select [(ngModel)]="existingParams.severity">
+    <option *ngFor="let severity of issueSeverities" [value]="severity">{{ severity }}</option>
+  </select>
+
+  <select [(ngModel)]="existingParams.priority">
+    <option *ngFor="let priority of issuePriorities" [value]="priority">{{ priority }}</option>
+  </select>
+
+  <select [(ngModel)]="existingParams.assignedTo">
+    <option *ngFor="let assignedTo of todosUsers" [value]="assignedTo">{{ assignedTo }}</option>
+  </select>
+
+  <select [(ngModel)]="existingParams.createdBy">
+    <option *ngFor="let createdBy of todosUsers" [value]="createdBy">{{ createdBy }}</option>
+  </select>
+
+  <button class="btn btn-dark" (click)="filtrar()">Filtrar</button>
+</div>
+
+
+
+<hr>
+
+<div class="container d-flex justify-content-center" >
+  <table >
+  <thead>
+  <tr>
+    <th>Subject</th>
+    <th>Description</th>
+    <th>Created by</th>
+    <th>Assigned to</th>
+    <th>State</th>
+    <th>Typeof</th>
+    <th>Severity</th>
+    <th>Priority</th>
+    <th>Show this issue</th>
+
+  </tr>
+  <!--<hr>-->
+  </thead>
+    <tbody>
+      <ng-container *ngFor="let issue of allIssues">
+        <tr >
+          <td>{{ issue.subject }}</td>
+          <td> {{ issue.description }}</td>
+          <td>{{ issue.created_by_id }}</td>
+          <td>{{ issue.assigned_to_id }}</td>
+          <td>{{ issue.state }}</td>
+          <td>{{ issue.typeof }}</td>
+          <td>{{ issue.severity }}</td>
+          <td>{{ issue.priority }}</td>
+          <td>
+
+            <ng-container *ngIf="issue.bloqueada; else isNotBlocked">
+              <button class="btn btn-danger" (click)="showIssue(issue.id)">Show Issue</button>
+            </ng-container>
+
+            <ng-template #isNotBlocked>
+              <button class="btn btn-primary" (click)="showIssue(issue.id)">Show Issue</button>
+            </ng-template>
+
+
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<div class="container d-flex justify-content-center">
+<button (click)="goCreate()"class="btn btn-success container espai">
+  New Issue
+</button>
+
+<button (click)="goBulk()" class="btn btn-outline-success container">
+  Create in Bulk
+</button>
+</div>

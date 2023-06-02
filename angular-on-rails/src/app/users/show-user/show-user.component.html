@@ -1,0 +1,64 @@
+<div>
+
+  <ng-container *ngIf="user.avatar">
+    <div class="container d-flex justify-content-center" [id]="user">
+      <img [src]="user.avatar" style="height: 200px;">
+    </div>
+  </ng-container>
+</div>
+
+
+<div class="container d-flex justify-content-center" [id]="user">
+  <h2>{{ user?.name }}</h2>
+</div>
+<div class="container d-flex justify-content-center" [id]="user">
+  <p><strong> Correo: </strong>{{ user?.email }}</p>
+</div>
+<div class="container d-flex justify-content-center" [id]="user">
+  <p><strong> Bio: </strong>{{ user?.bio }}</p>
+</div>
+<div class="container d-flex justify-content-center">
+  <!-- <button class="btn btn-outline-success" (click)="changeSection('activities')">Go to Activities</button> -->
+  <!-- add big space between tags -->
+
+  <!-- <button class="btn btn-outline-info" (click)="changeSection('whatched')">Go to Watched Issues</button> -->
+
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="d-flex justify-content-center">----------- Activities -----------</h2>
+
+      <div *ngIf="activities.length === 0" class="container">
+        <p>No activities yet</p>
+      </div>
+
+      <div *ngFor="let act of activities" class="container">
+        <strong>{{ act.action }}d {{ act.description }}</strong>
+        <small>{{ act.created_at | date:'MMM dd, yyyy hh:mm a' }}</small>
+        <hr>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h2 class="d-flex justify-content-center">----------- Watched Issues -----------</h2>
+
+      <div *ngIf="watched.length === 0" class="container">
+        <p>No watched issues yet</p>
+      </div>
+
+      <div *ngFor="let issue of watched" class="container">
+        <strong>{{ issue.subject }}</strong>
+        <hr>
+        <small>{{ issue.description }}</small>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container d-flex justify-content-center">
+  <a [routerLink]="['/users']" class="btn btn-secondary">Back to users</a>
+</div>

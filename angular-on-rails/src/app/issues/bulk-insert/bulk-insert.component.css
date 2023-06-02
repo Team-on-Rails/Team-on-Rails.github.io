@@ -1,0 +1,14 @@
+.custom-textarea {
+    height: 60vh;
+  }
+
+  .button-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .vertical-line {
+    border-left: 1px solid #000;
+    height: 100%;
+    margin: 0 10px;
+  }

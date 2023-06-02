@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+
+
+  <button class="btn btn-outline-light" (click)="editUser()">Edit Profile</button>
+  <span class="flexExpand"></span>
+  <button class="btn btn-outline-light" (click)="goIssues()" mat-button>
+    Issues
+  </button>
+  <button class="btn btn-outline-light" (click)="goUsers()" mat-button>
+    Users
+  </button>
+<!--
+  <div>
+    <h2>Selecciona un usuario:</h2>
+    <select [(ngModel)]="selectedUser" (change)="selectUser()">
+      <option value="" disabled selected>Selecciona un usuario</option>
+      <option *ngFor="let user of users" [value]="user">{{ user.name }}</option>
+    </select>
+  </div> -->
+
+  <div class="d-flex esQpai">
+    <h2 class="text-right mr-2">Selecciona un usuario:</h2>
+    <select [(ngModel)]="usuariSeleccionat" (change)="switchToUser(usuariSeleccionat)">
+      <option value="user1">Usuario 1</option>
+      <option value="user2">Usuario 2</option>
+    </select>
+  </div>
+
+
+</mat-toolbar>
+
+<!-- The routed views render in the <router-outlet>-->
+<router-outlet></router-outlet>
